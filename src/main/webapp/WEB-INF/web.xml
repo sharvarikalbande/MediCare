@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/javaee/web-app_3_1.xsd"
+        version="3.1">
+
+
+    <!-- =========================================================
+         APPLICATION NAME
+         ========================================================= -->
+
+    <display-name>SevenTabProject</display-name>
+
+
+    <!-- =========================================================
+         SPRING DISPATCHER SERVLET
+         ========================================================= -->
+
+    <servlet>
+
+        <servlet-name>dispatcher</servlet-name>
+
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+
+        <init-param>
+
+            <param-name>
+                contextConfigLocation
+            </param-name>
+
+            <param-value>
+                /WEB-INF/applicationContext.xml
+            </param-value>
+
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+
+
+        <!-- =====================================================
+             MULTIPART CONFIGURATION FOR EXCEL/FILE UPLOAD
+             ===================================================== -->
+
+        <multipart-config>
+
+            <!-- Maximum size of one uploaded file = 10 MB -->
+            <max-file-size>10485760</max-file-size>
+
+            <!-- Maximum size of complete request = 20 MB -->
+            <max-request-size>20971520</max-request-size>
+
+            <!-- Files are processed immediately -->
+            <file-size-threshold>0</file-size-threshold>
+
+        </multipart-config>
+
+    </servlet>
+
+
+    <!-- =========================================================
+         SPRING MVC URL
+         ========================================================= -->
+
+    <servlet-mapping>
+
+        <servlet-name>dispatcher</servlet-name>
+
+        <url-pattern>/</url-pattern>
+
+    </servlet-mapping>
+
+
+    <!-- =========================================================
+         DWR SERVLET
+         ========================================================= -->
+
+    <servlet>
+
+        <servlet-name>dwr-invoker</servlet-name>
+
+        <servlet-class>
+            org.directwebremoting.servlet.DwrServlet
+        </servlet-class>
+
+        <init-param>
+
+            <param-name>debug</param-name>
+
+            <param-value>true</param-value>
+
+        </init-param>
+
+        <init-param>
+
+            <param-name>
+                crossDomainSessionSecurity
+            </param-name>
+
+            <param-value>false</param-value>
+
+        </init-param>
+
+        <load-on-startup>2</load-on-startup>
+
+    </servlet>
+
+
+    <!-- =========================================================
+         DWR URL
+         ========================================================= -->
+
+    <servlet-mapping>
+
+        <servlet-name>dwr-invoker</servlet-name>
+
+        <url-pattern>/dwr/*</url-pattern>
+
+    </servlet-mapping>
+
+
+    <!-- =========================================================
+         CHARACTER ENCODING
+         ========================================================= -->
+
+    <filter>
+
+        <filter-name>encodingFilter</filter-name>
+
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+
+        <init-param>
+
+            <param-name>encoding</param-name>
+
+            <param-value>UTF-8</param-value>
+
+        </init-param>
+
+        <init-param>
+
+            <param-name>forceEncoding</param-name>
+
+            <param-value>true</param-value>
+
+        </init-param>
+
+    </filter>
+
+
+    <filter-mapping>
+
+        <filter-name>encodingFilter</filter-name>
+
+        <url-pattern>/*</url-pattern>
+
+    </filter-mapping>
+
+
+    <!-- =========================================================
+         WELCOME PAGE
+         ========================================================= -->
+
+    <welcome-file-list>
+
+        <welcome-file>
+            index.jsp
+        </welcome-file>
+
+    </welcome-file-list>
+
+
+</web-app>

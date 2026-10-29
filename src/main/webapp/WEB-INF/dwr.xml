@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE dwr PUBLIC
+        "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+        "https://directwebremoting.org/schema/dwr30.dtd">
+
+<dwr>
+
+    <allow>
+
+        <!-- =====================================================
+             PREFIX DWR SERVICE
+             ===================================================== -->
+
+        <create
+                creator="new"
+                javascript="PrefixDwrService">
+
+            <param
+                    name="class"
+                    value="org.example.service.PrefixDwrService"/>
+
+        </create>
+
+
+        <!-- =====================================================
+             PREFIX ENTITY CONVERTER
+             ===================================================== -->
+
+        <convert
+                converter="bean"
+                match="org.example.entity.Prefix"/>
+
+    </allow>
+
+</dwr>
